@@ -16,7 +16,7 @@ data "aws_security_group" "existing_sg" {
 resource "aws_instance" "example" {
   ami                         = "ami-0f918f7e67a3323f0"
   instance_type               = "t2.micro"
-  subnet_id                   = data.aws_vpc.default.subnets[0] 
+  subnet_id                   = data.aws_subnet_ids.default_subnets.ids[0]
   vpc_security_group_ids      = [data.aws_security_group.existing_sg.id]
   key_name                    = "new-key"
 
