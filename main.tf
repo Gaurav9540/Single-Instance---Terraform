@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "ap-south-1" 
+  region = var.region 
 }
 
 # Data source to get default VPC
@@ -9,17 +9,17 @@ data "aws_vpc" "default" {
 
 # Data source to get existing security group by name
 data "aws_security_group" "existing_sg" {
-  name   = "my-sg"   
+  name   = var.aws_security_group   
   vpc_id = data.aws_vpc.default.id
 }
 
 resource "aws_instance" "example" {
-  ami                         = "ami-0f918f7e67a3323f0"
-  instance_type               = "t2.micro"
+  ami                         = var.ami
+  instance_type               = var.instance_type
   vpc_security_group_ids      = [data.aws_security_group.existing_sg.id]
-  key_name                    = "new-key"
+  key_name                    = var.key_name
 
   tags = {
-    Name = "Instance-1"
+    Name = var.instance_name
   }
 }
