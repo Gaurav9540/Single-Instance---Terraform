@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "instance_name" {
-  default = "Instance-1"
+  default = "My-Instance"
 }
 
 variable "ami" {
